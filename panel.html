@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ScorpioXDdos Apk v2.0 | @maklopler</title>
+<style>
+:root {
+  --bg: #020202; --surface: #0a0a0a; --surface2: #0f0f0f;
+  --border: #1a1a1a; --border2: #252525;
+  --red: #ff0a0a; --green: #00e676; --yellow: #ffab00;
+  --cyan: #00e5ff; --magenta: #ff4081; --white: #e0e0e0; --gray: #666;
+  --gradient: linear-gradient(135deg, #ff0a0a, #ff4081);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  background-image: radial-gradient(circle at 50% 0%, rgba(255,0,0,0.04) 0%, transparent 60%);
+}
+.header h1 {
+  font-size: 20px; font-weight: 900; letter-spacing: 4px;
+  background: var(--gradient); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.header .user-info { font-size: 11px; color: var(--gray); }
+.header button {
+  padding: 8px 16px; background: var(--red); border: none; border-radius: 6px;
+  color: #fff; cursor: pointer; font-weight: 600; font-family: inherit;
+}
+.container { max-width: 950px; margin: 20px auto; padding: 0 16px; }
+.panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px; margin-bottom: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+.panel .title {
+  font-size: 12px; font-weight: 800; letter-spacing: 3px; color: var(--red);
+  margin-bottom: 20px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px;
+}
+.panel .title::after { content: ''; flex: 1; height: 1px; background: var(--border2); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.form-grid.full { grid-template-columns: 1fr; }
+.form-grid input, .form-grid select, .form-grid button {
+  padding: 14px 16px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--white); font-family: inherit; font-size: 13px;
+  outline: none; transition: all 0.3s ease;
+}
+.form-grid input:focus, .form-grid select:focus {
+  border-color: var(--red); box-shadow: 0 0 0 3px rgba(255,0,0,0.08);
+}
+.form-grid button {
+  background: var(--gradient); border: none; color: #fff;
+  font-weight: 800; letter-spacing: 2px; cursor: pointer; text-transform: uppercase;
+}
+.form-grid button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,0,0,0.35); }
+.form-grid button:active { transform: scale(0.96); }
+.form-grid button.stop-btn { background: #2a2a2a; border: 1px solid #333; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }
+.stat-card {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 10px; text-align: center;
+  transition: all 0.3s ease;
+}
+.stat-card:hover { border-color: var(--red); transform: translateY(-2px); }
+.stat-card .val {
+  font-size: 24px; font-weight: 900;
+  background: var(--gradient); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.stat-card .lbl { font-size: 8px; color: var(--gray); margin-top: 4px; letter-spacing: 2px; text-transform: uppercase; }
+.log-box {
+  max-height: 300px; overflow-y: auto; background: var(--surface2);
+  border-radius: 10px; padding: 14px; border: 1px solid var(--border);
+}
+.log-box::-webkit-scrollbar { width: 3px; }
+.log-box::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+.log-entry {
+  padding: 8px 12px; border-bottom: 1px solid #111; font-size: 11px;
+  border-radius: 6px; margin-bottom: 4px; font-family: 'Courier New', monospace;
+}
+.log-entry.running { background: rgba(0,230,118,0.04); color: var(--green); border-left: 3px solid var(--green); }
+.log-entry.stopped { background: rgba(255,0,0,0.04); color: var(--red); border-left: 3px solid var(--red); }
+.log-entry .time { color: var(--yellow); font-weight: 600; }
+.progress-wrap { width: 100%; height: 5px; background: var(--border); border-radius: 3px; margin-top: 16px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--gradient); width: 0%; transition: width 0.5s ease; border-radius: 3px; }
+.pulse { animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.footer { text-align: center; padding: 20px; color: var(--gray); font-size: 9px; letter-spacing: 3px; }
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
+  #skipBtn { bottom: 20px; right: 20px; padding: 10px 20px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Main Panel -->
+<div id="mainPanel" style="display:none;">
+  <div class="header">
+    <div>
+      <h1>LanaDdos Apk v2.0</h1>
+      <div class="user-info" id="userInfo">Welcome</div>
+    </div>
+    <button onclick="logout()">LOGOUT</button>
+  </div>
+
+  <div class="container">
+    <div class="panel">
+      <div class="title">⚡ Attack Configuration</div>
+      <div class="form-grid full">
+        <input type="url" id="targetUrl" placeholder="https://target-website.com">
+      </div>
+      <div class="form-grid">
+        <input type="number" id="threads" placeholder="Threads" value="2000">
+        <input type="number" id="duration" placeholder="Duration (s, 0=inf)" value="0">
+      </div>
+      <div class="form-grid">
+        <select id="method">
+          <option value="GET">GET</option><option value="POST">POST</option>
+          <option value="HEAD">HEAD</option><option value="RANDOM">🎲 RANDOM</option>
+        </select>
+        <select id="attackMode">
+          <option value="mixed">🎯 MIXED</option><option value="cfbypass">🛡️ CF BYPASS</option>
+          <option value="tls">🔒 TLS FLOOD</option><option value="http2">⚡ HTTP/2 STORM</option>
+          <option value="tcp">🔌 TCP FLOOD</option><option value="udp">💥 UDP STORM</option>
+          <option value="slowloris">🐢 SLOWLORIS</option>
+        </select>
+      </div>
+      <div class="form-grid">
+        <select id="proxyMode">
+          <option value="off">🔴 Proxy OFF</option><option value="on">🟢 Proxy ON</option>
+        </select>
+        <button id="startBtn" onclick="startAttack()">🚀 Launch Attack</button>
+        <button class="stop-btn" onclick="stopAttack()">🛑 Stop</button>
+      </div>
+      <div class="progress-wrap"><div class="progress-fill" id="progressBar"></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="title">📊 Live Statistics</div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="val" id="rpsVal">0</div><div class="lbl">RPS</div></div>
+        <div class="stat-card"><div class="val" id="totalVal">0</div><div class="lbl">Total</div></div>
+        <div class="stat-card"><div class="val" id="successVal">0</div><div class="lbl">Success</div></div>
+        <div class="stat-card"><div class="val" id="failedVal">0</div><div class="lbl">Failed</div></div>
+        <div class="stat-card"><div class="val" id="durVal">0s</div><div class="lbl">Duration</div></div>
+        <div class="stat-card"><div class="val" id="cfVal">0</div><div class="lbl">CF Bypassed</div></div>
+        <div class="stat-card"><div class="val" id="tlsVal">0</div><div class="lbl">TLS Handshake</div></div>
+        <div class="stat-card"><div class="val" id="h2Val">0</div><div class="lbl">HTTP/2 Streams</div></div>
+        <div class="stat-card"><div class="val" id="udpVal">0</div><div class="lbl">UDP Packets</div></div>
+        <div class="stat-card"><div class="val" id="tcpVal">0</div><div class="lbl">TCP Conn</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="title">📜 Attack Logs</div>
+      <div class="log-box" id="logBox">
+        <div class="log-entry"><span class="time">[System]</span> C2 Engine v7.0 ready.</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">ScorpioXddos Apk v2.0 • CF BYPASS • TLS • HTTP/2 • TCP • UDP • SLOWLORIS • @maklopler</div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const sessionId = localStorage.getItem('sessionId');
+const username = localStorage.getItem('username');
+
+if (!sessionId) window.location.href = '/';
+document.getElementById('userInfo').textContent = '👤 ' + (username || 'User');
+
+const socket = io();
+
+// ==================== VERIFY SESSION ====================
+socket.emit('verify_session', { sessionId });
+socket.on('session_verified', (data) => {
+  if (!data.valid) {
+    localStorage.clear();
+    window.location.href = '/';
+  }
+});
+
+// ==================== ATTACK FUNCTIONS ====================
+function addLog(text, cls) {
+  const box = document.getElementById('logBox');
+  const el = document.createElement('div');
+  el.className = 'log-entry ' + (cls || '');
+  el.innerHTML = `<span class="time">[${new Date().toLocaleTimeString()}]</span> ${text}`;
+  box.prepend(el);
+  if (box.children.length > 40) box.removeChild(box.lastChild);
+}
+
+function startAttack() {
+  const target = document.getElementById('targetUrl').value.trim();
+  if (!target || !target.startsWith('http')) { alert('Invalid URL'); return; }
+  
+  socket.emit('start_attack', {
+    target,
+    threads: parseInt(document.getElementById('threads').value) || 2000,
+    duration: parseInt(document.getElementById('duration').value) || 0,
+    method: document.getElementById('method').value,
+    attackMode: document.getElementById('attackMode').value,
+    useProxy: document.getElementById('proxyMode').value === 'on'
+  });
+  
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('startBtn').textContent = '⏳ ATTACKING...';
+  document.getElementById('startBtn').classList.add('pulse');
+  document.getElementById('progressBar').style.width = '100%';
+  addLog(`🔥 Attack: ${target} | Mode: ${document.getElementById('attackMode').value}`, 'running');
+}
+
+function stopAttack() {
+  socket.emit('stop_attack');
+  resetUI();
+  addLog('🛑 Stopped', 'stopped');
+}
+
+function resetUI() {
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('startBtn').textContent = '🚀 Launch Attack';
+  document.getElementById('startBtn').classList.remove('pulse');
+  document.getElementById('progressBar').style.width = '0%';
+}
+
+function logout() {
+  fetch('/api/logout', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ sessionId }) });
+  localStorage.clear();
+  window.location.href = '/';
+}
+
+socket.on('attack_stats', (data) => {
+  document.getElementById('rpsVal').textContent = (data.rps||0).toLocaleString();
+  document.getElementById('totalVal').textContent = (data.total||0).toLocaleString();
+  document.getElementById('successVal').textContent = (data.success||0).toLocaleString();
+  document.getElementById('failedVal').textContent = (data.failed||0).toLocaleString();
+  document.getElementById('durVal').textContent = (data.duration||0)+'s';
+  document.getElementById('cfVal').textContent = (data.cfBypassed||0).toLocaleString();
+  document.getElementById('tlsVal').textContent = (data.tlsHandshakes||0).toLocaleString();
+  document.getElementById('h2Val').textContent = (data.http2Streams||0).toLocaleString();
+  document.getElementById('udpVal').textContent = (data.udpPackets||0).toLocaleString();
+  document.getElementById('tcpVal').textContent = (data.tcpConnections||0).toLocaleString();
+});
+
+socket.on('attack_stopped', (data) => {
+  resetUI();
+  if (data && data.result) addLog(`✅ Finished: ${data.result.total} req, ${data.result.rps} RPS`, 'stopped');
+});
+
+socket.on('error_msg', (msg) => { alert('Error: ' + msg); resetUI(); });
+</script>
+</body>
+  </html>
